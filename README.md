@@ -21,8 +21,7 @@ A 7th-semester Computer Engineering ML mini-project. It trains and compares seve
 11. [File-by-file explanation](#11-file-by-file-explanation)
 12. [Limitations](#12-limitations-read-this-before-your-viva)
 13. [Concepts glossary](#13-concepts-glossary)
-14. [Viva questions and answers](#14-viva-questions-and-answers)
-15. [Future improvements](#15-future-improvements)
+14. [Future improvements](#14-future-improvements)
 
 ---
 
