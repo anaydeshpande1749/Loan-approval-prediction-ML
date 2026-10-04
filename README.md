@@ -404,7 +404,7 @@ Use **Self employed = No** in all rows.
 
 ---
 
-## 12. Limitations (read this before your viva)
+## 12. Limitations 
 
 1. **CIBIL dominates.** About 99% of the predictive power comes from one feature, and the data behaves almost like "CIBIL above about 550 is approved". The dataset is clean and probably synthetic or rule-generated. A real bank dataset would be messier and the accuracy would be lower.
 2. **High accuracy does not mean real-world accuracy.** The model has only learned the pattern in this dataset.
