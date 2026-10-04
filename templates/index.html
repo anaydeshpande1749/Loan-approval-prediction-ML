@@ -9,89 +9,78 @@
 <body>
 <div class="container">
     <h1>Loan Approval Prediction</h1>
-    <p class="subtitle">Machine Learning Based Loan Eligibility Predictor</p>
+    <p class="subtitle">Machine Learning mini-project &mdash; enter applicant details to get a model estimate.</p>
 
-    <form method="POST">
+    {% if load_error %}
+    <div class="alert alert-error">{{ load_error }}</div>
+    {% endif %}
+
+    {% if quality_warning %}
+    <div class="alert alert-warning">
+        <strong>Model quality notice:</strong> {{ quality_warning }}
+    </div>
+    {% endif %}
+
+    {% if errors %}
+    <div class="alert alert-error">
+        <strong>Please fix the following:</strong>
+        <ul>
+            {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form method="POST" novalidate>
         <div class="grid">
-            <div>
-                <label>No. of Dependents</label>
-                <input type="number" name="no_of_dependents" min="0" required>
+            {% for f in numeric_fields %}
+            <div class="field">
+                <label for="{{ f.name }}">{{ f.label }}</label>
+                <input type="number" id="{{ f.name }}" name="{{ f.name }}"
+                       min="{{ f.min }}" max="{{ f.max }}" step="1"
+                       placeholder="{{ f.placeholder }}"
+                       value="{{ form.get(f.name, '') }}" required>
+                <small>Supported: {{ '{:,}'.format(f.min) }} &ndash; {{ '{:,}'.format(f.max) }}</small>
             </div>
+            {% endfor %}
 
-            <div>
-                <label>Education</label>
-                <select name="education" required>
-                    <option value="Graduate">Graduate</option>
-                    <option value="Not Graduate">Not Graduate</option>
+            <div class="field">
+                <label for="education">Education</label>
+                <select id="education" name="education" required>
+                    {% for opt in categories.get('education', []) %}
+                    <option value="{{ opt }}" {% if form.get('education') == opt %}selected{% endif %}>{{ opt }}</option>
+                    {% endfor %}
                 </select>
             </div>
 
-            <div>
-                <label>Self Employed</label>
-                <select name="self_employed" required>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
+            <div class="field">
+                <label for="self_employed">Self employed</label>
+                <select id="self_employed" name="self_employed" required>
+                    {% for opt in categories.get('self_employed', []) %}
+                    <option value="{{ opt }}" {% if form.get('self_employed') == opt %}selected{% endif %}>{{ opt }}</option>
+                    {% endfor %}
                 </select>
-            </div>
-
-            <div>
-                <label>Annual Income</label>
-                <input type="number" name="income_annum" min="0" required>
-            </div>
-
-            <div>
-                <label>Loan Amount</label>
-                <input type="number" name="loan_amount" min="0" required>
-            </div>
-
-            <div>
-                <label>Loan Term (years)</label>
-                <input type="number" name="loan_term" min="1" required>
-            </div>
-
-            <div>
-                <label>CIBIL Score</label>
-                <input type="number" name="cibil_score" min="300" max="900" required>
-            </div>
-
-            <div>
-                <label>Residential Assets Value</label>
-                <input type="number" name="residential_assets_value" min="0" required>
-            </div>
-
-            <div>
-                <label>Commercial Assets Value</label>
-                <input type="number" name="commercial_assets_value" min="0" required>
-            </div>
-
-            <div>
-                <label>Luxury Assets Value</label>
-                <input type="number" name="luxury_assets_value" min="0" required>
-            </div>
-
-            <div>
-                <label>Bank Asset Value</label>
-                <input type="number" name="bank_asset_value" min="0" required>
             </div>
         </div>
 
-        <button type="submit">Predict Loan Status</button>
+        <button type="submit" {% if load_error %}disabled{% endif %}>Predict</button>
     </form>
 
-    {% if prediction %}
-        <div class="result">
-            <h2>Loan {{ prediction }}</h2>
-            {% if probability is not none %}
-                <p>Predicted approval probability: <strong>{{ probability }}%</strong></p>
-            {% endif %}
-        </div>
+    {% if result %}
+    <div class="result {{ 'approved' if result.approved else 'rejected' }}">
+        <h2>Loan {{ 'APPROVED' if result.approved else 'REJECTED' }}</h2>
+        <p class="prob">Estimated approval probability: <strong>{{ result.probability }}%</strong></p>
+        <p class="detail">
+            Decision rule: approved if the estimated probability is at least {{ result.threshold }}%
+            (threshold chosen from training data). Model: {{ result.model }}.
+        </p>
+    </div>
     {% endif %}
 
-    {% if error %}
-        <div class="error">
-            {{ error }}
-        </div>
-    {% endif %}
+    <p class="disclaimer">
+        This is an ML model estimate for educational purposes and not a guaranteed loan approval or a
+        real banking decision. The probability is an estimate from a statistical model trained on a
+        sample dataset.
+    </p>
 </div>
 </body>
 </html>

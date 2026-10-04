@@ -1,26 +1,118 @@
 {
-  "best_model": "Logistic Regression",
-  "results": [
-    {
-      "model": "Logistic Regression",
-      "accuracy": 0.5238,
-      "precision": 0.5666,
-      "recall": 0.5341,
-      "f1_score": 0.5499
+  "cross_validation_on_train": {
+    "Logistic Regression": {
+      "accuracy": 0.9161283988560209,
+      "precision": 0.9316111718748363,
+      "recall": 0.9337067108533554,
+      "f1": 0.9326129554381473,
+      "roc_auc": 0.9663646062916982,
+      "roc_auc_std": 0.003661309570006775
     },
-    {
-      "model": "Decision Tree",
-      "accuracy": 0.4789,
-      "precision": 0.5313,
-      "recall": 0.368,
-      "f1_score": 0.4348
+    "Decision Tree": {
+      "accuracy": 0.9640530157510565,
+      "precision": 0.9770961319193365,
+      "recall": 0.9656857221761944,
+      "f1": 0.9710031679096065,
+      "roc_auc": 0.9932784155915886,
+      "roc_auc_std": 0.0020255988716583583
     },
-    {
-      "model": "Random Forest",
-      "accuracy": 0.5075,
-      "precision": 0.553,
-      "recall": 0.5,
-      "f1_score": 0.5252
+    "Random Forest": {
+      "accuracy": 0.9757442267469159,
+      "precision": 0.9759780690723041,
+      "recall": 0.9854272300469484,
+      "f1": 0.9806158650220371,
+      "roc_auc": 0.9960460420178731,
+      "roc_auc_std": 0.0019213312904697796
+    },
+    "Extra Trees": {
+      "accuracy": 0.9400960430272762,
+      "precision": 0.9445023656042487,
+      "recall": 0.960039768019884,
+      "f1": 0.952196004281587,
+      "roc_auc": 0.9850274386115316,
+      "roc_auc_std": 0.004180771579410628
+    },
+    "Gradient Boosting": {
+      "accuracy": 0.9795424083322661,
+      "precision": 0.9791142550394936,
+      "recall": 0.988244131455399,
+      "f1": 0.983633497270475,
+      "roc_auc": 0.9947277731039122,
+      "roc_auc_std": 0.0015269698560233754
+    },
+    "Hist Gradient Boosting": {
+      "accuracy": 0.9801293379433986,
+      "precision": 0.9804757107989385,
+      "recall": 0.9877790665562,
+      "f1": 0.9840916181166381,
+      "roc_auc": 0.9946159479398917,
+      "roc_auc_std": 0.001855626150516019
     }
-  ]
+  },
+  "selected_model": "Random Forest",
+  "shuffled_label_cv_auc": 0.48443311911746045,
+  "signal_verdict": "USEFUL_SIGNAL",
+  "threshold": 0.5,
+  "threshold_reason": "No threshold beat 0.50 by a meaningful margin (>0.5 pts balanced accuracy), so the default was kept.",
+  "threshold_tuning_metrics_oof_train": {
+    "accuracy": 0.9710695499707773,
+    "balanced_accuracy": 0.969176409938046,
+    "precision": 0.9765037593984962,
+    "recall": 0.9769628584861307,
+    "f1": 0.9767332549941246,
+    "roc_auc": 0.9946860824152784
+  },
+  "final_test_metrics_at_threshold": {
+    "accuracy": 0.9754672897196262,
+    "balanced_accuracy": 0.9742295553699063,
+    "precision": 0.9811676082862524,
+    "recall": 0.9793233082706767,
+    "f1": 0.980244590780809,
+    "roc_auc": 0.9972442680776014
+  },
+  "final_test_metrics_at_0.50": {
+    "accuracy": 0.9754672897196262,
+    "balanced_accuracy": 0.9742295553699063,
+    "precision": 0.9811676082862524,
+    "recall": 0.9793233082706767,
+    "f1": 0.980244590780809,
+    "roc_auc": 0.9972442680776014
+  },
+  "test_brier_score": 0.01700592063595922,
+  "test_confusion_matrix": {
+    "rows_actual": [
+      "Rejected",
+      "Approved"
+    ],
+    "cols_predicted": [
+      "Rejected",
+      "Approved"
+    ],
+    "matrix": [
+      [
+        314,
+        10
+      ],
+      [
+        11,
+        521
+      ]
+    ]
+  },
+  "majority_class_baseline_accuracy": 0.6214953271028038,
+  "feature_importance_auc_drop": {
+    "cibil_score": 0.4724241158451684,
+    "loan_term": 0.01965039914601312,
+    "loan_amount": 0.002895549057829705,
+    "commercial_assets_value": 0.002191241993873516,
+    "income_annum": 0.0011608883319409124,
+    "residential_assets_value": 0.0009839413348185166,
+    "luxury_assets_value": 0.0008232386521859758,
+    "bank_asset_value": 0.0003863826232246792,
+    "self_employed": 0.00014213775178687494,
+    "no_of_dependents": 0.00011545066369620383,
+    "education": -3.887032395806233e-05
+  },
+  "n_train": 3422,
+  "n_test": 856
 }

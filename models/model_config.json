@@ -1,0 +1,75 @@
+{
+  "best_model": "Random Forest",
+  "calibration": "sigmoid (CalibratedClassifierCV, cv=5)",
+  "selection_metric": "5-fold cross-validated ROC-AUC",
+  "decision_threshold": 0.5,
+  "threshold_method": "maximise balanced accuracy on out-of-fold training predictions",
+  "threshold_reason": "No threshold beat 0.50 by a meaningful margin (>0.5 pts balanced accuracy), so the default was kept.",
+  "numeric_features": [
+    "no_of_dependents",
+    "income_annum",
+    "loan_amount",
+    "loan_term",
+    "cibil_score",
+    "residential_assets_value",
+    "commercial_assets_value",
+    "luxury_assets_value",
+    "bank_asset_value"
+  ],
+  "categorical_features": [
+    "education",
+    "self_employed"
+  ],
+  "categories": {
+    "education": [
+      "Graduate",
+      "Not Graduate"
+    ],
+    "self_employed": [
+      "No",
+      "Yes"
+    ]
+  },
+  "ranges": {
+    "no_of_dependents": {
+      "min": 0.0,
+      "max": 5.0
+    },
+    "income_annum": {
+      "min": 200000.0,
+      "max": 9900000.0
+    },
+    "loan_amount": {
+      "min": 300000.0,
+      "max": 38800000.0
+    },
+    "loan_term": {
+      "min": 2.0,
+      "max": 20.0
+    },
+    "cibil_score": {
+      "min": 300.0,
+      "max": 900.0
+    },
+    "residential_assets_value": {
+      "min": 0.0,
+      "max": 29100000.0
+    },
+    "commercial_assets_value": {
+      "min": 0.0,
+      "max": 19400000.0
+    },
+    "luxury_assets_value": {
+      "min": 300000.0,
+      "max": 39200000.0
+    },
+    "bank_asset_value": {
+      "min": 0.0,
+      "max": 14700000.0
+    }
+  },
+  "signal_verdict": "USEFUL_SIGNAL",
+  "test_roc_auc": 0.9972442680776014,
+  "test_accuracy": 0.9754672897196262,
+  "model_quality_warning": null
+}
